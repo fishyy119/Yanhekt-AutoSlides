@@ -58,9 +58,11 @@
 
 
 > [!CAUTION]
-> **Disclaimer**: This tool is intended strictly for personal study; users assume full legal responsibility for ensuring their usage complies with all applicable copyright laws and platform regulations. Terms and Conditions available here: [TERMS AND CONDITIONS](docs/terms.md)
+> **Disclaimer**: This tool is intended strictly for personal study; users assume full legal responsibility for ensuring their usage complies with all applicable copyright laws and platform regulations. Terms and Conditions apply: [TERMS AND CONDITIONS](docs/terms.md)
+> <br> **免責聲明**：本工具嚴格僅供個人學習之用；用戶須自行承擔全部法律責任，確保其使用符合所有適用的版權法及平台規例。受條款及細則約束：[TERMS AND CONDITIONS](docs/terms.md)
 > 
 > This tool is NOT an official application of, and is NOT affiliated with, associated with, endorsed by, or in any way connected to Beijing Institute of Technology (BIT), or any of their subsidiaries or affiliates. All product and company names are trademarks™ or registered® trademarks of their respective holders.
+> <br> 本工具**並非**北京理工大學（BIT）或其任何附屬公司或關聯機構的官方應用程式，亦與上述機構無任何附屬、關聯、認可或連繫。所有產品及公司名稱均為其各自持有人的商標™或註冊®商標。
 
 
 ### 相关项目
@@ -257,6 +259,7 @@
 
 > [!IMPORTANT]
 > The Built-in service is provided by the developer free of charge and on an "as is" basis. We make no warranties, express or implied, regarding the continuity or stability of the service, and we may modify or interrupt the service at any time without prior notice. The user agrees to use the service in a reasonable, fair, and non-commercial manner.
+> <br> 開發者免費並按「原樣」基礎提供內置服務。我們不對服務的連續性或穩定性作出任何明示或隱含的保證，並可能隨時修改或中斷服務，恕不另行通知。用戶同意以合理、公平及非商業的方式使用本服務。
 
 <br clear="both">
 
