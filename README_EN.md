@@ -58,10 +58,11 @@
 
 
 > [!CAUTION]
-> **Disclaimer**: This tool is intended strictly for personal study; users assume full legal responsibility for ensuring their usage complies with all applicable copyright laws and platform regulations. Terms and Conditions apply: [TERMS AND CONDITIONS](docs/terms.md)
+> **Disclaimer**: This tool is intended strictly for personal study; users assume full legal responsibility for ensuring their usage complies with all applicable copyright laws and platform regulations. Terms and Conditions apply.
+>
+> <p align="center"><a href="docs/terms.md">Read full Terms and Conditions</a></p>
 > 
 > This tool is NOT an official application of, and is NOT affiliated with, associated with, endorsed by, or in any way connected to Beijing Institute of Technology (BIT), or any of their subsidiaries or affiliates. All product and company names are trademarks™ or registered® trademarks of their respective holders.
-
 
 ### Related Projects
 

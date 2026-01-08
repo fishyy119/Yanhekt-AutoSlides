@@ -58,11 +58,13 @@
 
 
 > [!CAUTION]
-> **Disclaimer**: This tool is intended strictly for personal study; users assume full legal responsibility for ensuring their usage complies with all applicable copyright laws and platform regulations. Terms and Conditions apply: [TERMS AND CONDITIONS](docs/terms.md)
-> <br> **免責聲明**：本工具嚴格僅供個人學習之用；用戶須自行承擔全部法律責任，確保其使用符合所有適用的版權法及平台規例。受條款及細則約束：[TERMS AND CONDITIONS](docs/terms.md)
+> **Disclaimer**: This tool is intended strictly for personal study; users assume full legal responsibility for ensuring their usage complies with all applicable copyright laws and platform regulations. Terms and Conditions apply.
+> <br> **免責聲明**：本工具嚴格僅供個人學習之用；用戶須自行承擔全部法律責任，確保其使用符合所有適用的版權法及平台規例。受條款及細則約束。
+>
+> <p align="center"><a href="docs/terms.md">Read full Terms and Conditions / 按此查閱完整條款及細則</a></p>
 > 
 > This tool is NOT an official application of, and is NOT affiliated with, associated with, endorsed by, or in any way connected to Beijing Institute of Technology (BIT), or any of their subsidiaries or affiliates. All product and company names are trademarks™ or registered® trademarks of their respective holders.
-> <br> 本工具**並非**北京理工大學（BIT）或其任何附屬公司或關聯機構的官方應用程式，亦與上述機構無任何附屬、關聯、認可或連繫。所有產品及公司名稱均為其各自持有人的商標™或註冊®商標。
+> <br> 本工具**並非**北京理工大學（BIT）的官方應用程式，亦與其或其任何附屬機構或關聯方無任何關聯、聯繫、獲其認可或以任何方式相關。所有產品及公司名稱均為其各自持有人的商標™或註冊®商標。
 
 
 ### 相关项目
