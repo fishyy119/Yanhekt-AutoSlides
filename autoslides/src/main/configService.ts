@@ -226,7 +226,7 @@ export class ConfigService {
   }
 
   setTaskSpeed(speed: number): void {
-    const validSpeed = Math.max(1, Math.min(10, speed));
+    const validSpeed = Math.max(1, Math.min(16, speed));
     this.store.set('taskSpeed', validSpeed);
   }
 
