@@ -1201,9 +1201,9 @@ const autoCheckForUpdates = async () => {
 .modal-content {
   background-color: white;
   border-radius: 8px;
-  width: 560px;
+  width: 640px;
   max-width: 90vw;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1323,6 +1323,10 @@ const autoCheckForUpdates = async () => {
 /* Release notes section */
 .release-notes-section {
   margin-bottom: 16px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .release-notes-section h4 {
@@ -1330,10 +1334,13 @@ const autoCheckForUpdates = async () => {
   font-size: 13px;
   font-weight: 600;
   color: #333;
+  flex-shrink: 0;
 }
 
 .release-notes-scroll {
-  max-height: 180px;
+  flex: 1;
+  min-height: 120px;
+  max-height: 300px;
   overflow-y: auto;
   padding: 12px;
   background: #f6f8fa;
@@ -1343,7 +1350,7 @@ const autoCheckForUpdates = async () => {
 
 /* Download section */
 .download-section {
-  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .download-assets {
