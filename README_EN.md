@@ -417,7 +417,7 @@ For detailed configuration of `Advanced Settings`, please refer to the [Configur
 
 2. `Slide Stability Check` is based on the assumption that a speaker usually stays on the same slide for a while to explain. Checking if a new slide remains unchanged for several consecutive checks excludes animations, videos, and slight movements.
   - With `Slide Stability Check` enabled, `Check Count` set to `2`, and `Slide Detection Interval` set to `2000` ms, a slide is saved only if it "stably" displays for at least `6` seconds.
-  - `Slide Detection Interval` is the interval at 1x speed. Actual interval adjusts with playback speed; at high speeds, `JavaScript` execution is slowed, with a minimum actual interval of `200` ms.
+  - `Slide Detection Interval` is the interval at 1x speed. Actual interval adjusts with playback speed; at high speeds, `JavaScript` execution is slowed, with a minimum actual interval of `100` ms.
 
 > [!TIP]
 > If the speaker flips slides quickly, some slides shown for too short a time won't be saved if `Slide Stability Check` is enabled.
@@ -554,6 +554,7 @@ renderer/
 ├── workers/
 │   ├── postProcessor.worker.ts
 │   └── slideProcessor.worker.ts
+├── PdfMakerApp.vue
 └── TrashApp.vue
 
 ```

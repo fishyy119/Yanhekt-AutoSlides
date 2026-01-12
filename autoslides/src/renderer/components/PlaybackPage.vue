@@ -156,6 +156,9 @@
             <label>{{ $t('playback.playbackSpeed') }}</label>
             <select v-model="currentPlaybackRate" @change="changePlaybackRate" :disabled="shouldDisableControls">
               <option value="1">1x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="1.75">1.75x</option>
               <option value="2">2x</option>
               <option value="3">3x</option>
               <option value="4">4x</option>
@@ -165,6 +168,12 @@
               <option value="8">8x</option>
               <option value="9">9x</option>
               <option value="10">10x</option>
+              <option value="11">11x</option>
+              <option value="12">12x</option>
+              <option value="13">13x</option>
+              <option value="14">14x</option>
+              <option value="15">15x</option>
+              <option value="16">16x</option>
             </select>
           </div>
 

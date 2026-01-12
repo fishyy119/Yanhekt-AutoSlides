@@ -79,11 +79,14 @@ export function usePerformanceOptimization(options: UsePerformanceOptimizationOp
       if (videoPlayer.value && !videoPlayer.value.paused) {
         const currentTime = videoPlayer.value.currentTime
         const expectedRate = currentPlaybackRate.value
+        // Browser video elements typically support max 16x playback rate
+        const maxBrowserRate = 16
+        const expectedActualRate = Math.min(expectedRate, maxBrowserRate)
 
         // Check if playback rate has been throttled
-        if (Math.abs(videoPlayer.value.playbackRate - expectedRate) > 0.01) {
-          console.log(`Playback rate drift detected: ${videoPlayer.value.playbackRate} vs expected ${expectedRate}, correcting...`)
-          videoPlayer.value.playbackRate = expectedRate
+        if (Math.abs(videoPlayer.value.playbackRate - expectedActualRate) > 0.01) {
+          console.log(`Playback rate drift detected: ${videoPlayer.value.playbackRate} vs expected ${expectedActualRate}, correcting...`)
+          videoPlayer.value.playbackRate = expectedActualRate
         }
 
         // Light activity to prevent throttling

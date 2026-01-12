@@ -141,28 +141,41 @@ export class SlideExtractor {
     this.intervalTable.clear();
 
     // Dynamic scaling factors for different playback rates
-    // Higher rates get progressively smaller divisors to avoid excessive computation
+    // For 1-13x: scaling factor equals the speed, so actual video interval = base interval
+    // For 14x+: scaling factor capped at 13 to avoid floating point issues
+    // At base=1000ms with minInterval=100ms, scaling=13 gives 77ms -> clamped to 100ms
+    // At base=2000ms with scaling=13: check=154ms, video interval scales with speed
+    // Formula: actual_video_interval = (base / scaling_factor) * speed
     const scalingMap: { [key: number]: number } = {
-      1: 1.0,    // 1x -> base interval
-      2: 1.5,    // 2x -> base / 1.5
-      3: 2.0,    // 3x -> base / 2.0
-      4: 2.5,    // 4x -> base / 2.5
-      5: 3.0,    // 5x -> base / 3.0
-      6: 3.5,    // 6x -> base / 3.5
-      7: 4.0,    // 7x -> base / 4.0
-      8: 4.5,    // 8x -> base / 4.5
-      9: 5.0,    // 9x -> base / 5.0
-      10: 5.5    // 10x -> base / 5.5
+      1: 1,        // 1x -> 2000ms check, 2000ms video interval
+      1.25: 1.25,  // 1.25x -> 1600ms check, 2000ms video interval
+      1.5: 1.5,    // 1.5x -> 1333ms check, 2000ms video interval
+      1.75: 1.75,  // 1.75x -> 1143ms check, 2000ms video interval
+      2: 2,        // 2x -> 1000ms check, 2000ms video interval
+      3: 3,        // 3x -> 667ms check, 2000ms video interval
+      4: 4,        // 4x -> 500ms check, 2000ms video interval
+      5: 5,        // 5x -> 400ms check, 2000ms video interval
+      6: 6,        // 6x -> 333ms check, 2000ms video interval
+      7: 7,        // 7x -> 286ms check, 2000ms video interval
+      8: 8,        // 8x -> 250ms check, 2000ms video interval
+      9: 9,        // 9x -> 222ms check, 2000ms video interval
+      10: 10,      // 10x -> 200ms check, 2000ms video interval
+      11: 11,      // 11x -> 182ms check, 2000ms video interval
+      12: 12,      // 12x -> 167ms check, 2000ms video interval
+      13: 13,      // 13x -> 154ms check, 2000ms video interval
+      14: 13,      // 14x -> 154ms check, 2154ms video interval (capped)
+      15: 13,      // 15x -> 154ms check, 2308ms video interval (capped)
+      16: 13       // 16x -> 154ms check, 2462ms video interval (capped)
     };
 
     // Pre-calculate intervals for all supported playback rates
     Object.keys(scalingMap).forEach(rateStr => {
-      const rate = parseInt(rateStr);
+      const rate = parseFloat(rateStr);
       const scalingFactor = scalingMap[rate];
       const adjustedInterval = Math.round(this.baseCheckInterval / scalingFactor);
 
-      // Ensure minimum interval of 200ms to prevent excessive computation
-      const minInterval = 200;
+      // Ensure minimum interval of 100ms to prevent excessive computation
+      const minInterval = 100;
       const finalInterval = Math.max(minInterval, adjustedInterval);
 
       this.intervalTable.set(rate, finalInterval);

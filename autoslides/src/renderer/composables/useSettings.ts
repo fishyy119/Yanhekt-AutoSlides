@@ -133,8 +133,8 @@ export function useSettings(): UseSettingsReturn {
 
     let value = Math.round(slideCheckInterval.value)
 
-    if (value < 1000) {
-      value = 1000
+    if (value < 500) {
+      value = 500
     } else if (value > 10000) {
       value = 10000
     }
@@ -148,8 +148,8 @@ export function useSettings(): UseSettingsReturn {
       }
     }
 
-    if (value < 1000) {
-      value = 1000
+    if (value < 500) {
+      value = 500
     }
 
     if (value !== slideCheckInterval.value) {

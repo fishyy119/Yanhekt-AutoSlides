@@ -133,7 +133,7 @@
               <input
                 v-model.number="slideCheckInterval"
                 type="number"
-                min="1000"
+                min="500"
                 max="10000"
                 step="500"
                 class="slide-interval-input"
@@ -185,7 +185,22 @@
           <div class="setting-description">{{ $t('settings.taskSpeedDescription') }}</div>
           <div class="task-speed-selector">
             <select v-model="taskSpeed" @change="setTaskSpeed" class="task-speed-select">
-              <option v-for="i in 10" :key="i" :value="i">{{ i }}x</option>
+              <option :value="1">1x</option>
+              <option :value="2">2x</option>
+              <option :value="3">3x</option>
+              <option :value="4">4x</option>
+              <option :value="5">5x</option>
+              <option :value="6">6x</option>
+              <option :value="7">7x</option>
+              <option :value="8">8x</option>
+              <option :value="9">9x</option>
+              <option :value="10">10x</option>
+              <option :value="11">11x</option>
+              <option :value="12">12x</option>
+              <option :value="13">13x</option>
+              <option :value="14">14x</option>
+              <option :value="15">15x</option>
+              <option :value="16">16x</option>
             </select>
           </div>
         </div>
