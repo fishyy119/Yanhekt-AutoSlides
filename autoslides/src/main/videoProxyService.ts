@@ -75,9 +75,30 @@ export class VideoProxyService {
   private apiClient: ApiClient;
   private intranetMapping: IntranetMappingService;
 
+  // HTTPS agents with keep-alive for connection reuse
+  private httpsAgent: https.Agent;
+  private httpsAgentInsecure: https.Agent;
+
   constructor(apiClient: ApiClient, intranetMapping: IntranetMappingService) {
     this.apiClient = apiClient;
     this.intranetMapping = intranetMapping;
+
+    // Create HTTPS agent with keep-alive for external requests
+    this.httpsAgent = new https.Agent({
+      keepAlive: true,
+      maxSockets: 32,
+      maxFreeSockets: 10,
+      timeout: 30000
+    });
+
+    // Create HTTPS agent with keep-alive for intranet requests (insecure)
+    this.httpsAgentInsecure = new https.Agent({
+      keepAlive: true,
+      maxSockets: 32,
+      maxFreeSockets: 10,
+      timeout: 10000,
+      rejectUnauthorized: false
+    });
   }
 
   /**
@@ -365,9 +386,9 @@ export class VideoProxyService {
 
         // Add HTTPS agent for intranet mode if needed
         if (this.intranetMapping.isEnabled()) {
-          axiosConfig.httpsAgent = new https.Agent({
-            rejectUnauthorized: false
-          });
+          axiosConfig.httpsAgent = this.httpsAgentInsecure;
+        } else {
+          axiosConfig.httpsAgent = this.httpsAgent;
         }
 
         // Proxy the request
@@ -498,11 +519,11 @@ export class VideoProxyService {
       }
     };
 
-    // Add HTTPS agent for intranet mode if needed
+    // Add HTTPS agent (use insecure for intranet mode)
     if (this.intranetMapping.isEnabled()) {
-      axiosConfig.httpsAgent = new https.Agent({
-        rejectUnauthorized: false
-      });
+      axiosConfig.httpsAgent = this.httpsAgentInsecure;
+    } else {
+      axiosConfig.httpsAgent = this.httpsAgent;
     }
 
     // Proxy the request with retry logic for 403 errors
@@ -712,11 +733,11 @@ export class VideoProxyService {
       }
     };
 
-    // Add HTTPS agent for intranet mode if needed
+    // Add HTTPS agent (use insecure for intranet mode)
     if (this.intranetMapping.isEnabled()) {
-      axiosConfig.httpsAgent = new https.Agent({
-        rejectUnauthorized: false
-      });
+      axiosConfig.httpsAgent = this.httpsAgentInsecure;
+    } else {
+      axiosConfig.httpsAgent = this.httpsAgent;
     }
 
     // Proxy the request with retry logic for 403 errors
@@ -1014,6 +1035,14 @@ export class VideoProxyService {
       this.proxyServer = null;
       this.proxyPort = 0;
       console.log('Video proxy server stopped');
+    }
+
+    // Destroy HTTPS agents to close all keep-alive connections
+    if (this.httpsAgent) {
+      this.httpsAgent.destroy();
+    }
+    if (this.httpsAgentInsecure) {
+      this.httpsAgentInsecure.destroy();
     }
 
     // Clear all active clients

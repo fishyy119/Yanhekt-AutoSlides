@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import https from 'https';
 import axios from 'axios';
 import crypto from 'crypto';
 import { spawn } from 'child_process';
@@ -97,8 +98,8 @@ class M3u8Downloader {
   private tsSum = 0;
   private isRunning = false;
   private shouldStop = false;
-  private maxWorkers = 32;
-  private numRetries = 99;
+  private maxWorkers = 8;
+  private numRetries = 10;
   private ffmpegProcess: any = null;
 
 
@@ -116,6 +117,8 @@ class M3u8Downloader {
   private signature: string | null = null;
   private timestamp: string | null = null;
   private signatureInterval: NodeJS.Timeout | null = null;
+  private httpsAgent: https.Agent;
+  private requestTimeout: number;
 
   constructor(
     url: string,
@@ -140,6 +143,15 @@ class M3u8Downloader {
 
     this.workDir = path.join(outputDir, name);
     this.filePath = path.join(outputDir, name);
+
+    // Create HTTPS agent with keep-alive for connection reuse
+    this.requestTimeout = isIntranetMode ? 10000 : 30000;
+    this.httpsAgent = new https.Agent({
+      keepAlive: true,
+      maxSockets: this.maxWorkers,
+      maxFreeSockets: 10,
+      timeout: this.requestTimeout
+    });
 
     // Create directory if it doesn't exist
     if (!fs.existsSync(path.dirname(this.filePath))) {
@@ -199,6 +211,11 @@ class M3u8Downloader {
     if (this.signatureInterval) {
       clearInterval(this.signatureInterval);
       this.signatureInterval = null;
+    }
+
+    // Destroy the HTTPS agent to close all keep-alive connections
+    if (this.httpsAgent) {
+      this.httpsAgent.destroy();
     }
 
     // Force kill FFmpeg process if it's running
@@ -263,7 +280,8 @@ class M3u8Downloader {
 
   private createAxiosInstance() {
     const instance = axios.create({
-      timeout: 30000
+      timeout: 30000,
+      httpsAgent: this.httpsAgent
     });
 
     if (this.isIntranetMode) {
@@ -472,7 +490,7 @@ class M3u8Downloader {
       const axiosInstance = this.createAxiosInstance();
       const response = await axiosInstance.get(tsUrl, {
         responseType: 'arraybuffer',
-        timeout: 60000,
+        timeout: this.requestTimeout,
         headers: this.headers
       });
 
